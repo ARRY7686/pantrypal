@@ -1,0 +1,15 @@
+# Local minikube: images built with `docker build` and loaded with `minikube image load`.
+image:
+  registry: ""
+  pullPolicy: IfNotPresent
+backend:
+  image:
+    tag: local
+frontend:
+  image:
+    tag: local
+monitoring:
+  serviceMonitor:
+    enabled: true
+  grafanaDashboard:
+    enabled: true

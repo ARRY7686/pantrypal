@@ -1,0 +1,12 @@
+{{- if .Values.monitoring.grafanaDashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "pantrypal.fullname" . }}-grafana-dashboard
+  labels:
+    {{- include "pantrypal.labels" . | nindent 4 }}
+    grafana_dashboard: "1"
+data:
+  pantrypal-api.json: |-
+{{ .Files.Get "dashboards/pantrypal-api.json" | indent 4 }}
+{{- end }}
