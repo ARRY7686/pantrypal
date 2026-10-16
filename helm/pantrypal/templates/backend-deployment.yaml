@@ -27,7 +27,9 @@ spec:
       initContainers:
         - name: wait-for-postgres
           image: {{ .Values.postgres.image }}
-          command: ["sh", "-c", "until pg_isready -h {{ include "pantrypal.fullname" . }}-postgres -p 5432; do echo waiting for postgres; sleep 2; done"]
+          # -U is required: the pod runs as uid 10001, which has no passwd entry, so libpq
+          # cannot derive a default user name and pg_isready would never report success.
+          command: ["sh", "-c", "until pg_isready -h {{ include "pantrypal.fullname" . }}-postgres -p 5432 -U {{ .Values.postgres.username }} -d {{ .Values.postgres.database }}; do echo waiting for postgres; sleep 2; done"]
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
