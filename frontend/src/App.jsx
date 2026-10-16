@@ -212,6 +212,7 @@ export default function App() {
                     onClick={() => setLocation(l.id)}
                   >
                     {l.label}
+                    {stats && <span className="tab__count">{l.id ? stats.by_location[l.id] : stats.total_items}</span>}
                   </button>
                 ))}
               </nav>

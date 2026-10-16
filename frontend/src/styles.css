@@ -405,3 +405,9 @@ button:focus-visible {
   background: #ece8ff;
   color: #5b3fd1;
 }
+
+.tab__count {
+  margin-left: 6px;
+  font-weight: 700;
+  opacity: 0.85;
+}
