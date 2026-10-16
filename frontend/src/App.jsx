@@ -32,6 +32,7 @@ function ItemCard({ item, onQuantity, onDelete }) {
       <header className="item__head">
         <h3 className="item__name">{item.name}</h3>
         <span className={`badge badge--${item.status}`}>{expiryLabel(item)}</span>
+        {item.quantity <= 0 && <span className="badge badge--empty">Out of stock</span>}
       </header>
       <p className="item__meta">
         <span className="chip">{item.location}</span>
@@ -118,7 +119,7 @@ export default function App() {
           </span>
           <div>
             <h1>PantryPal</h1>
-            <p>Know what is in your kitchen before it goes off.</p>
+            <p>Know what is in your kitchen before it goes off - and what has run out.</p>
           </div>
         </div>
       </header>

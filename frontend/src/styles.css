@@ -400,3 +400,8 @@ button:focus-visible {
     width: 100%;
   }
 }
+
+.badge--empty {
+  background: #ece8ff;
+  color: #5b3fd1;
+}
