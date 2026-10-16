@@ -306,6 +306,8 @@ On a real cluster the `deploy` job does step 3 automatically: set the repo varia
 
 ## Evidence (terminal screenshots)
 
+> **Commit SHAs in the evidence.** After the screenshots were taken, the commit messages were edited (file contents unchanged), which gave every commit a new SHA. The screenshots, GitHub Actions runs #1–#2 and the GHCR tags show the original SHAs: `a18d96c` = `862cf45` (*Show item counts on the location filter tabs*), `075cac2` = `07afcb8` (*Upgrade backend dependencies…*), `feddfe8` = `0a809fc` (*Document PantryPal…*).
+
 All terminal screenshots were captured from a real PowerShell session while running the commands; plain-text transcripts are in [`docs/outputs/`](docs/outputs/).
 
 ### Setup
