@@ -1,0 +1,41 @@
+# Values for prometheus-community/kube-prometheus-stack
+#   helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
+#     -n monitoring --create-namespace -f monitoring/kube-prometheus-stack-values.yaml
+
+prometheus:
+  prometheusSpec:
+    # Pick up ServiceMonitors from every namespace (the PantryPal chart creates one in "pantrypal"),
+    # not only the ones labelled for this Helm release.
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorNamespaceSelector: {}
+    podMonitorSelectorNilUsesHelmValues: false
+    retention: 2d
+    resources:
+      requests: { cpu: 200m, memory: 512Mi }
+
+grafana:
+  enabled: true
+  # Local demo only. In a shared cluster set this from a Secret (grafana.admin.existingSecret).
+  adminPassword: pantrypal-admin
+  grafana.ini:
+    auth.anonymous:
+      enabled: true          # read-only viewer access for the classroom demo
+      org_role: Viewer
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard   # the PantryPal chart ships its dashboard as a labelled ConfigMap
+      searchNamespace: ALL
+    datasources:
+      enabled: true
+
+alertmanager:
+  enabled: true
+
+# Keep the demo light on minikube.
+kubeEtcd:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
