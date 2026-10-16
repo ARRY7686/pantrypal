@@ -1,0 +1,43 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> Get-ChildItem -Name
+.terraform
+.terraform.lock.hcl
+main.tf
+outputs.tf
+README.md
+terraform.tfvars.example
+variables.tf
+versions.tf
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> Get-ChildItem env:AWS_ENDPOINT_URL, env:AWS_REGION | Format-Table -AutoSize
+
+Name             Value                
+----             -----                
+AWS_ENDPOINT_URL http://localhost:4566
+AWS_REGION       ap-south-1           
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> aws sts get-caller-identity
+{
+    "UserId": "AKIAIOSFODNN7EXAMPLE",
+    "Account": "123456789012",
+    "Arn": "arn:aws:sts::123456789012:user/moto"
+}
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> terraform init
+Initializing the backend...
+
+Initializing modules...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/null from the dependency lock file
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Reusing previous version of hashicorp/time from the dependency lock file
+- Reusing previous version of hashicorp/tls from the dependency lock file
+- Reusing previous version of hashicorp/cloudinit from the dependency lock file
+- Using previously-installed hashicorp/time v0.14.2
+- Using previously-installed hashicorp/tls v4.4.1
+- Using previously-installed hashicorp/cloudinit v2.4.1
+- Using previously-installed hashicorp/null v3.3.2
+- Using previously-installed hashicorp/aws v5.100.0
+
+Terraform has been successfully initialized!
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> terraform fmt -check -recursive
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> terraform validate
+Success! The configuration is valid.

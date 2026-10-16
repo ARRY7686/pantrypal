@@ -1,0 +1,13 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot http://localhost:3000/ compose-desktop 1440 1100
+saved docs/screenshots/browser/compose-desktop.png (1440x1100) from http://localhost:3000/
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot http://localhost:3000/ compose-mobile 500 1500
+saved docs/screenshots/browser/compose-mobile.png (500x1500) from http://localhost:3000/
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot http://localhost:8000/docs fastapi-docs 1440 1100
+saved docs/screenshots/browser/fastapi-docs.png (1440x1100) from http://localhost:8000/docs
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> (Invoke-WebRequest -UseBasicParsing http://localhost:3000/).Content.Substring(0, 200)
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="PantryPal - tr

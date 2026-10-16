@@ -1,0 +1,20 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose up --build -d 2>&1 | Select-Object -Last 14
+ Container pantrypal-backend-1 Creating 
+ Container pantrypal-backend-1 Created 
+ Container pantrypal-frontend-1 Creating 
+ Container pantrypal-frontend-1 Created 
+ Container pantrypal-postgres-1 Starting 
+ Container pantrypal-postgres-1 Started 
+ Container pantrypal-postgres-1 Waiting 
+ Container pantrypal-postgres-1 Healthy 
+ Container pantrypal-backend-1 Starting 
+ Container pantrypal-backend-1 Started 
+ Container pantrypal-backend-1 Waiting 
+ Container pantrypal-backend-1 Healthy 
+ Container pantrypal-frontend-1 Starting 
+ Container pantrypal-frontend-1 Started 
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose ps
+NAME                   IMAGE                COMMAND                  SERVICE    CREATED          STATUS                                     PORTS
+pantrypal-backend-1    pantrypal-backend    "sh /app/docker-entr…"   backend    12 seconds ago   Up 6 seconds (healthy)                     0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+pantrypal-frontend-1   pantrypal-frontend   "/docker-entrypoint.…"   frontend   12 seconds ago   Up Less than a second (health: starting)   0.0.0.0:3000->8080/tcp, [::]:3000->8080/tcp
+pantrypal-postgres-1   postgres:16-alpine   "docker-entrypoint.s…"   postgres   12 seconds ago   Up 10 seconds (healthy)                    5432/tcp

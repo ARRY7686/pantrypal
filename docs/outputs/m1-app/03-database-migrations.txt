@@ -1,0 +1,30 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Get-ChildItem backend\alembic\versions -Name
+0001_create_items.py
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose exec -T backend alembic current
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+0001_create_items (head)
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose exec -T postgres psql -U pantrypal -d pantrypal -c '\d items'
+                                       Table "public.items"
+   Column   |           Type           | Collation | Nullable |              Default              
+------------+--------------------------+-----------+----------+-----------------------------------
+ id         | integer                  |           | not null | nextval('items_id_seq'::regclass)
+ name       | character varying(120)   |           | not null | 
+ category   | character varying(40)    |           | not null | 'other'::character varying
+ location   | character varying(20)    |           | not null | 'pantry'::character varying
+ quantity   | double precision         |           | not null | '1'::double precision
+ unit       | character varying(20)    |           | not null | 'pcs'::character varying
+ expires_on | date                     |           |          | 
+ created_at | timestamp with time zone |           | not null | now()
+Indexes:
+    "items_pkey" PRIMARY KEY, btree (id)
+    "ix_items_expires_on" btree (expires_on)
+    "ix_items_location" btree (location)
+    "ix_items_name" btree (name)
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose exec -T postgres psql -U pantrypal -d pantrypal -c 'SELECT location, count(*) FROM items GROUP BY location ORDER BY location'
+ location | count 
+----------+-------
+ freezer  |     3
+ fridge   |     6
+ pantry   |     6
+(3 rows)

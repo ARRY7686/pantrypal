@@ -1,0 +1,21 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get pods -n pantrypal -o wide
+NAME                                  READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+pantrypal-backend-7f6dcf888f-6x649    1/1     Running   0          22s   10.244.0.44   minikube   <none>           <none>
+pantrypal-backend-7f6dcf888f-f5rps    1/1     Running   0          22s   10.244.0.43   minikube   <none>           <none>
+pantrypal-frontend-5d854f749f-d2d4j   1/1     Running   0          22s   10.244.0.45   minikube   <none>           <none>
+pantrypal-frontend-5d854f749f-nmq2x   1/1     Running   0          22s   10.244.0.42   minikube   <none>           <none>
+pantrypal-postgres-0                  1/1     Running   0          22s   10.244.0.46   minikube   <none>           <none>
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get svc -n pantrypal
+NAME                 TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+pantrypal-backend    ClusterIP   10.100.161.103   <none>        8000/TCP   22s
+pantrypal-frontend   ClusterIP   10.104.99.61     <none>        80/TCP     22s
+pantrypal-postgres   ClusterIP   10.105.79.190    <none>        5432/TCP   22s
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get ingress -n pantrypal
+NAME        CLASS   HOSTS             ADDRESS   PORTS   AGE
+pantrypal   nginx   pantrypal.local             80      22s
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get statefulset,pvc -n pantrypal
+NAME                                  READY   AGE
+statefulset.apps/pantrypal-postgres   1/1     22s
+
+NAME                                              STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/data-pantrypal-postgres-0   Bound    pvc-c8ff0ada-9825-4b55-a66c-a1488a59f3c9   1Gi        RWO            standard       <unset>                 22s

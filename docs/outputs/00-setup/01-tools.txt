@@ -1,0 +1,36 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git log --oneline -1
+63b2b9f Add Terraform for the AWS VPC and EKS cluster
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker version --format 'Docker {{.Server.Version}}'
+Docker 29.7.2
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose version
+Docker Compose version v5.5.0
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl version --client
+Client Version: v1.36.1
+Kustomize Version: v5.8.1
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm version --short
+v4.3.0+gbec5b06
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube status
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> terraform version
+Terraform v1.16.5
+on windows_amd64
+
+Your version of Terraform is out of date! The latest version
+is 1.16.6. You can update by downloading from https://developer.hashicorp.com/terraform/install
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> act --version
+act version 0.2.89
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> trivy --version
+Version: 0.75.0
+Vulnerability DB:
+  Version: 2
+  UpdatedAt: 2026-10-16 01:13:54.947090392 +0000 UTC
+  NextUpdate: 2026-10-17 01:13:54.947090202 +0000 UTC
+  DownloadedAt: 2026-10-16 09:29:30.268637 +0000 UTC
+Check Bundle:
+  Digest: sha256:1583562f8b90ed2a071b99f0e5ffff6b57e4ceb6ca3e4796577b4e6a339eb74c
+  DownloadedAt: 2026-10-07 10:48:40.0481539 +0000 UTC

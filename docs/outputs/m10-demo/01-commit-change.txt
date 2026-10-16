@@ -1,0 +1,37 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git apply 'C:\Users\aadig\AppData\Local\Temp\claude\C--Users-aadig\c1cb3b41-4582-4827-9735-2eebe9cbfbf0\scratchpad\demo-change.patch'
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git diff
+diff --git a/frontend/src/App.jsx b/frontend/src/App.jsx
+index f242f23..c15df44 100644
+--- a/frontend/src/App.jsx
++++ b/frontend/src/App.jsx
+@@ -212,6 +212,7 @@ export default function App() {
+                     onClick={() => setLocation(l.id)}
+                   >
+                     {l.label}
++                    {stats && <span className="tab__count">{l.id ? stats.by_location[l.id] : stats.total_items}</span>}
+                   </button>
+                 ))}
+               </nav>
+diff --git a/frontend/src/styles.css b/frontend/src/styles.css
+index 271a603..c2550e4 100644
+--- a/frontend/src/styles.css
++++ b/frontend/src/styles.css
+@@ -405,3 +405,9 @@ button:focus-visible {
+   background: #ece8ff;
+   color: #5b3fd1;
+ }
++
++.tab__count {
++  margin-left: 6px;
++  font-weight: 700;
++  opacity: 0.85;
++}
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git commit -q -am 'Show item counts on the location filter tabs'
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git log --oneline -3
+a18d96c Show item counts on the location filter tabs
+cbd30a5 Fix backend init container never seeing PostgreSQL as ready
+189a522 Show an out-of-stock badge for items with zero quantity
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> $sha = (git rev-parse --short HEAD).Trim(); "new commit: $sha"
+new commit: a18d96c

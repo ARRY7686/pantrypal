@@ -1,0 +1,38 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> act push 2>&1 | Select-String -Pattern 'Job succeeded|Job failed|Success - Main|Failure - Main|passed|Total:|Error:' | ForEach-Object { $_.Line }
+[PantryPal CI/CD/Frontend build      ]   ✅  Success - Main actions/checkout@v4 [211.1133ms]
+[PantryPal CI/CD/Backend lint + tests]   ✅  Success - Main actions/checkout@v4 [282.5666ms]
+[PantryPal CI/CD/Frontend build      ]   ✅  Success - Main actions/setup-node@v4 [5.0659187s]
+[PantryPal CI/CD/Backend lint + tests]   ✅  Success - Main actions/setup-python@v5 [3.6265657s]
+[PantryPal CI/CD/Backend lint + tests]   ✅  Success - Main Install dependencies [827.5006ms]
+[PantryPal CI/CD/Backend lint + tests]   | All checks passed!
+[PantryPal CI/CD/Backend lint + tests]   ✅  Success - Main Lint (ruff) [178.2569ms]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_health PASSED                                    [  8%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_ready_checks_database PASSED                     [ 16%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_create_item_returns_201_and_status PASSED        [ 25%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_create_item_validation PASSED                    [ 33%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_list_items_and_filter_by_location PASSED         [ 41%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_search_by_name PASSED                            [ 50%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_get_item_and_404 PASSED                          [ 58%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_update_item_quantity_and_location PASSED         [ 66%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_delete_item PASSED                               [ 75%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_expiring_endpoint_and_statuses PASSED            [ 83%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_stats PASSED                                     [ 91%]
+[PantryPal CI/CD/Backend lint + tests]   | tests/test_api.py::test_metrics_endpoint_exposes_prometheus_format PASSED [100%]
+[PantryPal CI/CD/Backend lint + tests]   | ======================== 12 passed, 1 warning in 0.87s =========================
+[PantryPal CI/CD/Backend lint + tests]   ✅  Success - Main Run pytest (fails the build on any test failure) [2.724266s]
+[PantryPal CI/CD/Frontend build      ]   ✅  Success - Main Install dependencies [4.4977136s]
+[PantryPal CI/CD/Frontend build      ]   ✅  Success - Main Build [1.3016741s]
+[PantryPal CI/CD/Backend lint + tests]   ✅  Success - Main Upload test report [2.1058111s]
+[PantryPal CI/CD/Backend lint + tests] 🏁  Job succeeded
+[PantryPal CI/CD/Frontend build      ]   ✅  Success - Main Upload build [2.1490193s]
+[PantryPal CI/CD/Frontend build      ] 🏁  Job succeeded
+[PantryPal CI/CD/Build, scan and push backend image-1 ]   ✅  Success - Main actions/checkout@v4 [219.7092ms]
+[PantryPal CI/CD/Build, scan and push backend image-1 ]   ✅  Success - Main Compute image name (GHCR needs a lowercase owner) [128.4006ms]
+[PantryPal CI/CD/Build, scan and push backend image-1 ]   ✅  Success - Main Build image (tagged with the commit SHA, never latest) [886.9819ms]
+[PantryPal CI/CD/Build, scan and push frontend image-2]   ✅  Success - Main actions/checkout@v4 [207.7089ms]
+[PantryPal CI/CD/Build, scan and push frontend image-2]   ✅  Success - Main Compute image name (GHCR needs a lowercase owner) [103.6739ms]
+[PantryPal CI/CD/Build, scan and push frontend image-2]   ✅  Success - Main Build image (tagged with the commit SHA, never latest) [1.6970163s]
+[PantryPal CI/CD/Build, scan and push backend image-1 ]   ✅  Success - Main Trivy scan (fail on fixable HIGH/CRITICAL CVEs) [43.7976239s]
+[PantryPal CI/CD/Build, scan and push backend image-1 ] 🏁  Job succeeded
+[PantryPal CI/CD/Build, scan and push frontend image-2]   ✅  Success - Main Trivy scan (fail on fixable HIGH/CRITICAL CVEs) [49.4710076s]
+[PantryPal CI/CD/Build, scan and push frontend image-2] 🏁  Job succeeded

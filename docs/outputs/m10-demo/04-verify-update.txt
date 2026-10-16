@@ -1,0 +1,9 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> $milk = (Invoke-RestMethod 'http://localhost:8081/api/items?q=milk' -Headers @{ Host = 'pantrypal.local' })[0]
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod -Method Put "http://localhost:8081/api/items/$($milk.id)" -Headers @{ Host = 'pantrypal.local' } -ContentType application/json -Body '{"quantity":0}' | Format-Table id, name, quantity -AutoSize
+
+id name       quantity
+-- ----       --------
+ 1 Whole milk      0.0
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot http://pantrypal.local:8081/ k8s-after-update 1440 1100 8000 @('--host-resolver-rules=MAP pantrypal.local 127.0.0.1')
+saved docs/screenshots/browser/k8s-after-update.png (1440x1100) from http://pantrypal.local:8081/

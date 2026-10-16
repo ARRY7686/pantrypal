@@ -1,0 +1,23 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+"prometheus-community" has been added to your repositories
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm repo update prometheus-community
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "prometheus-community" chart repository
+Update Complete. ⎈Happy Helming!⎈
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f monitoring\kube-prometheus-stack-values.yaml --wait --timeout 15m | Select-Object -First 8
+Release "kube-prometheus-stack" does not exist. Installing it now.
+NAME: kube-prometheus-stack
+LAST DEPLOYED: Fri Oct 16 15:52:17 2026
+NAMESPACE: monitoring
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+NOTES:
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get pods -n monitoring
+NAME                                                        READY   STATUS    RESTARTS   AGE
+alertmanager-kube-prometheus-stack-alertmanager-0           2/2     Running   0          26s
+kube-prometheus-stack-grafana-55594b67cf-fcvxx              3/3     Running   0          28s
+kube-prometheus-stack-kube-state-metrics-78dc75b868-qn7ss   1/1     Running   0          28s
+kube-prometheus-stack-operator-5fdddc8458-z695m             1/1     Running   0          28s
+kube-prometheus-stack-prometheus-node-exporter-b7j6h        1/1     Running   0          28s
+prometheus-kube-prometheus-stack-prometheus-0               2/2     Running   0          24s

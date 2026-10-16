@@ -1,0 +1,17 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose build -q
+ Image pantrypal-backend Building 
+ Image pantrypal-frontend Building 
+ Image pantrypal-frontend Built 
+ Image pantrypal-backend Built 
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker tag pantrypal-backend pantrypal-backend:local
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker tag pantrypal-frontend pantrypal-frontend:local
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube image load pantrypal-backend:local
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube image load pantrypal-frontend:local
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube image ls | Select-String pantrypal
+
+docker.io/library/pantrypal-frontend:local
+docker.io/library/pantrypal-backend:local

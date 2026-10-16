@@ -1,0 +1,17 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker compose down -v
+ Container pantrypal-frontend-1 Stopping 
+ Container pantrypal-frontend-1 Stopped 
+ Container pantrypal-frontend-1 Removing 
+ Container pantrypal-frontend-1 Removed 
+ Container pantrypal-backend-1 Stopping 
+ Container pantrypal-backend-1 Stopped 
+ Container pantrypal-backend-1 Removing 
+ Container pantrypal-backend-1 Removed 
+ Container pantrypal-postgres-1 Stopping 
+ Container pantrypal-postgres-1 Stopped 
+ Container pantrypal-postgres-1 Removing 
+ Container pantrypal-postgres-1 Removed 
+ Network pantrypal_default Removing 
+ Volume pantrypal_pgdata Removing 
+ Volume pantrypal_pgdata Removed 
+ Network pantrypal_default Removed 

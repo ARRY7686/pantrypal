@@ -1,0 +1,11 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> $graf = Start-Job { kubectl port-forward -n monitoring svc/kube-prometheus-stack-grafana 3001:80 }
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod http://localhost:3001/api/health | ConvertTo-Json -Compress
+{"database":"ok","version":"13.2.4","commit":"0e79aef9d91abf3bdadae9af15763029072fb45b"}
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod 'http://localhost:3001/api/search?query=PantryPal' | Select-Object uid, title, url | Format-Table -AutoSize
+
+uid title url
+--- ----- ---
+             
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot 'http://localhost:3001/d/pantrypal-api/pantrypal-api?orgId=1&kiosk&from=now-15m&to=now' grafana-dashboard 1600 1000 20000
+saved docs/screenshots/browser/grafana-dashboard.png (1600x1000) from http://localhost:3001/d/pantrypal-api/pantrypal-api?orgId=1&kiosk&from=now-15m&to=now

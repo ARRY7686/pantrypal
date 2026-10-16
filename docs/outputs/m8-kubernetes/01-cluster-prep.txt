@@ -1,0 +1,16 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl apply -f k8s\namespace.yaml
+namespace/pantrypal unchanged
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube addons enable ingress
+* ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+* After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+  - Using image registry.k8s.io/ingress-nginx/controller:v1.15.1
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.9
+  - Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.9
+* Verifying ingress addon...
+* The 'ingress' addon is enabled
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get pods -n ingress-nginx
+NAME                                       READY   STATUS      RESTARTS      AGE
+ingress-nginx-admission-create-psq62       0/1     Completed   0             12s
+ingress-nginx-admission-patch-gwtl6        0/1     Completed   1 (11s ago)   12s
+ingress-nginx-controller-d7cd8c989-xvpc2   1/1     Running     0             12s

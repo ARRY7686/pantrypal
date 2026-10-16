@@ -1,0 +1,40 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> terraform output
+cluster_endpoint = "https://zl8v1prOqPvaevh1efeg.1X6.ap-south-1.eks.amazonaws.com/"
+cluster_name = "pantrypal-dev-eks"
+configure_kubectl = "aws eks update-kubeconfig --region ap-south-1 --name pantrypal-dev-eks"
+private_subnet_ids = [
+  "subnet-5e73b735eabc8f13a",
+  "subnet-e2994424b1509e18d",
+]
+public_subnet_ids = [
+  "subnet-541ca180bd068c837",
+  "subnet-10a69e93f2209b123",
+]
+vpc_id = "vpc-81180fef669f16e01"
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> aws ec2 describe-subnets --filters Name=tag:Project,Values=pantrypal --query 'Subnets[].{Subnet:SubnetId,Cidr:CidrBlock,AZ:AvailabilityZone,Public:MapPublicIpOnLaunch}' --output table
+-------------------------------------------------------------------------
+|                            DescribeSubnets                            |
++-------------+------------------+---------+----------------------------+
+|     AZ      |      Cidr        | Public  |          Subnet            |
++-------------+------------------+---------+----------------------------+
+|  ap-south-1a|  10.30.0.0/20    |  False  |  subnet-541ca180bd068c837  |
+|  ap-south-1a|  10.30.128.0/20  |  False  |  subnet-5e73b735eabc8f13a  |
+|  ap-south-1b|  10.30.16.0/20   |  False  |  subnet-10a69e93f2209b123  |
+|  ap-south-1b|  10.30.144.0/20  |  False  |  subnet-e2994424b1509e18d  |
++-------------+------------------+---------+----------------------------+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> aws eks describe-cluster --name pantrypal-dev-eks --query 'cluster.{Name:name,Status:status,Version:version,ServiceCidr:kubernetesNetworkConfig.serviceIpv4Cidr}' --output table
+-------------------------------------------------------------
+|                      DescribeCluster                      |
++--------------------+-----------------+---------+----------+
+|        Name        |   ServiceCidr   | Status  | Version  |
++--------------------+-----------------+---------+----------+
+|  pantrypal-dev-eks |  172.20.0.0/16  |  ACTIVE |  1.31    |
++--------------------+-----------------+---------+----------+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> aws eks describe-nodegroup --cluster-name pantrypal-dev-eks --nodegroup-name (aws eks list-nodegroups --cluster-name pantrypal-dev-eks --query 'nodegroups[0]' --output text) --query 'nodegroup.{Status:status,Instances:instanceTypes[0],Min:scalingConfig.minSize,Desired:scalingConfig.desiredSize,Max:scalingConfig.maxSize}' --output table
+--------------------------------------------------
+|                DescribeNodegroup               |
++---------+-------------+------+------+----------+
+| Desired |  Instances  | Max  | Min  | Status   |
++---------+-------------+------+------+----------+
+|  2      |  t3.medium  |  3   |  1   |  ACTIVE  |
++---------+-------------+------+------+----------+

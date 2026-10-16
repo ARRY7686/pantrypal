@@ -1,0 +1,20 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> act -l
+time="2026-10-16T15:26:21+05:30" level=info msg="Using docker host 'npipe:////./pipe/docker_engine', and daemon socket 'npipe:////./pipe/docker_engine'"
+Stage  Job ID           Job name                                            Workflow name    Workflow file  Events                             
+0      backend-tests    Backend lint + tests                                PantryPal CI/CD  ci-cd.yml      push,pull_request,workflow_dispatch
+0      frontend-build   Frontend build                                      PantryPal CI/CD  ci-cd.yml      pull_request,workflow_dispatch,push
+1      build-scan-push  Build, scan and push ${{ matrix.component }} image  PantryPal CI/CD  ci-cd.yml      workflow_dispatch,push,pull_request
+2      deploy           Deploy with Helm                                    PantryPal CI/CD  ci-cd.yml      push,pull_request,workflow_dispatch
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Select-String -Path .github\workflows\ci-cd.yml -Pattern '^on:|branches|docker build|trivy|--exit-code|docker push|github.sha'
+
+.github\workflows\ci-cd.yml:3:on:
+.github\workflows\ci-cd.yml:5:    branches: [main]
+.github\workflows\ci-cd.yml:7:    branches: [main]
+.github\workflows\ci-cd.yml:88:        run: echo "IMAGE=${REGISTRY}/${OWNER,,}/pantrypal-${{ matrix.component }}:${{ github.sha }}" >> "$GITHUB_ENV"
+.github\workflows\ci-cd.yml:93:        run: docker build -t "$IMAGE" ./${{ matrix.component }}
+.github\workflows\ci-cd.yml:95:      - name: Trivy scan (fail on fixable HIGH/CRITICAL CVEs)
+.github\workflows\ci-cd.yml:98:            aquasec/trivy:0.75.0 image \
+.github\workflows\ci-cd.yml:99:            --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 --no-progress \
+.github\workflows\ci-cd.yml:112:        run: docker push "$IMAGE"
+.github\workflows\ci-cd.yml:140:            --set backend.image.tag=${{ github.sha }} \
+.github\workflows\ci-cd.yml:141:            --set frontend.image.tag=${{ github.sha }} \

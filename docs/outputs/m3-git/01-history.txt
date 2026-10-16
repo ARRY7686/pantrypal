@@ -1,0 +1,27 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git log --oneline
+63b2b9f Add Terraform for the AWS VPC and EKS cluster
+c3a573b Add kube-prometheus-stack values and PantryPal Grafana dashboard
+4e44f58 Add Kubernetes namespace and Helm chart for PantryPal
+7406c66 Add GitHub Actions pipeline: tests, frontend build, Trivy, GHCR push
+91a850d Serialize Alembic migrations across replicas with an advisory lock
+075cac2 Upgrade backend dependencies to clear HIGH CVEs flagged by Trivy
+eff136d Containerize backend and frontend and add Docker Compose stack
+23c6bac Keep add-item form inputs inside the panel on narrow columns
+206e3ea Let Alembic import the app package when run via the CLI
+295816f Add React frontend for browsing and managing pantry items
+c1100fc Add pytest suite running against an isolated SQLite database
+b841b9a Add Alembic migration that creates the items table
+5808197 Add FastAPI backend with pantry item model and CRUD API
+80a9a10 Initialize PantryPal repository with .gitignore and README
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> (git rev-list --count HEAD).ToString() + ' commits'
+14 commits
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Select-String -Path .gitignore -Pattern '^\.env$|^__pycache__/|^node_modules/|^\.venv/'
+
+.gitignore:2:__pycache__/
+.gitignore:4:.venv/
+.gitignore:13:node_modules/
+.gitignore:17:.env
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> gitleaks git . --no-banner
+3:26PM INF 14 commits scanned.
+3:26PM INF scanned ~137823 bytes (137.82 KB) in 224ms
+3:26PM INF no leaks found

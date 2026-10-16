@@ -1,0 +1,30 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> $ing = Start-Job { kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8081:80 }
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> $be = Start-Job { kubectl port-forward -n pantrypal svc/pantrypal-backend 8001:8000 }
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> python scripts\seed_demo_data.py http://localhost:8001
+  1  Whole milk           fridge   expiring
+  2  Greek yoghurt        fridge   fresh
+  3  Cheddar cheese       fridge   fresh
+  4  Baby spinach         fridge   expiring
+  5  Chicken thighs       fridge   expired
+  6  Strawberries         fridge   expiring
+  7  Basmati rice         pantry   fresh
+  8  Penne pasta          pantry   fresh
+  9  Chopped tomatoes     pantry   fresh
+ 10  Peanut butter        pantry   fresh
+ 11  Sourdough bread      pantry   expiring
+ 12  Smoked paprika       pantry   no-date
+ 13  Frozen peas          freezer  fresh
+ 14  Vanilla ice cream    freezer  fresh
+ 15  Salmon fillets       freezer  fresh
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod http://localhost:8081/api/stats -Headers @{ Host = 'pantrypal.local' } | ConvertTo-Json -Compress
+{"total_items":15,"by_location":{"pantry":6,"fridge":6,"freezer":3},"expiring_soon":4,"expired":1,"expiring_soon_days":3}
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> (Invoke-WebRequest -UseBasicParsing http://localhost:8081/ -Headers @{ Host = 'pantrypal.local' }).Content.Substring(0, 120)
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-w
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot http://pantrypal.local:8081/ k8s-ingress 1440 1100 8000 @('--host-resolver-rules=MAP pantrypal.local 127.0.0.1')
+saved docs/screenshots/browser/k8s-ingress.png (1440x1100) from http://pantrypal.local:8081/

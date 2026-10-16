@@ -1,0 +1,27 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker build -q -t pantrypal-backend:$sha backend
+sha256:e6d92352cca24f1c716a98a2e757468799f8c3f0ba487b43f43b3f55bbf148a3
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker build -q -t pantrypal-frontend:$sha frontend
+sha256:cc48a7f25360e0d568aedd3de18bd998c3e9f7699405533fe0e0759081201ad7
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube image load pantrypal-backend:$sha
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube image load pantrypal-frontend:$sha
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm upgrade pantrypal helm\pantrypal -n pantrypal -f helm\pantrypal\values-local.yaml --set backend.image.tag=$sha --set frontend.image.tag=$sha --wait --timeout 5m | Select-Object -First 6
+Release "pantrypal" has been upgraded. Happy Helming!
+NAME: pantrypal
+LAST DEPLOYED: Fri Oct 16 15:56:17 2026
+NAMESPACE: pantrypal
+STATUS: deployed
+REVISION: 2
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm history pantrypal -n pantrypal
+REVISION	UPDATED                 	STATUS    	CHART          	APP VERSION	DESCRIPTION     
+1       	Fri Oct 16 15:53:11 2026	superseded	pantrypal-1.0.0	1.0.0      	Install complete
+2       	Fri Oct 16 15:56:17 2026	deployed  	pantrypal-1.0.0	1.0.0      	Upgrade complete
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get pods -n pantrypal -o custom-columns=POD:.metadata.name,IMAGE:.spec.containers[0].image,STATUS:.status.phase
+POD                                   IMAGE                        STATUS
+pantrypal-backend-5d96cdb966-nczx5    pantrypal-backend:a18d96c    Running
+pantrypal-backend-5d96cdb966-z4g48    pantrypal-backend:a18d96c    Running
+pantrypal-backend-7f6dcf888f-f5rps    pantrypal-backend:local      Running
+pantrypal-frontend-6bb767bf48-c26dp   pantrypal-frontend:a18d96c   Running
+pantrypal-frontend-6bb767bf48-cw8tj   pantrypal-frontend:a18d96c   Running
+pantrypal-postgres-0                  postgres:16-alpine           Running

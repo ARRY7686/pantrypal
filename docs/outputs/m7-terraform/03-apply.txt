@@ -1,0 +1,10 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> terraform apply -auto-approve tfplan | Select-String -Pattern 'module.eks.aws_eks|module.vpc.aws_vpc.this|aws_nat_gateway|Apply complete'
+
+module.vpc.aws_vpc.this[0]: Creating...
+module.vpc.aws_vpc.this[0]: Still creating... [00m10s elapsed]
+module.vpc.aws_vpc.this[0]: Creation complete after 10s [id=vpc-81180fef669f16e01]
+module.vpc.aws_nat_gateway.this[0]: Creating...
+module.vpc.aws_nat_gateway.this[0]: Creation complete after 0s [id=nat-540438fa111f8d793]
+module.eks.aws_eks_cluster.this[0]: Creating...
+module.eks.aws_eks_cluster.this[0]: Creation complete after 1s [id=pantrypal-dev-eks]
+Apply complete! Resources: 52 added, 0 changed, 0 destroyed.

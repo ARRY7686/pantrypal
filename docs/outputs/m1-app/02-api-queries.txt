@@ -1,0 +1,20 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod http://localhost:8000/api/items/expiring | Format-Table id, name, location, expires_on, days_left, status -AutoSize
+
+id name            location expires_on days_left status  
+-- ----            -------- ---------- --------- ------  
+ 5 Chicken thighs  fridge   2026-10-15        -1 expired 
+ 6 Strawberries    fridge   2026-10-16         0 expiring
+ 4 Baby spinach    fridge   2026-10-17         1 expiring
+ 1 Whole milk      fridge   2026-10-18         2 expiring
+11 Sourdough bread pantry   2026-10-19         3 expiring
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod 'http://localhost:8000/api/items?location=freezer' | Format-Table id, name, quantity, unit, expires_on -AutoSize
+
+id name              quantity unit expires_on
+-- ----              -------- ---- ----------
+15 Salmon fillets         4.0 pcs  2026-11-30
+14 Vanilla ice cream      1.0 tub  2026-12-30
+13 Frozen peas            1.0 kg   2027-04-14
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Invoke-RestMethod http://localhost:8000/api/stats | ConvertTo-Json -Compress
+{"total_items":15,"by_location":{"pantry":6,"fridge":6,"freezer":3},"expiring_soon":4,"expired":1,"expiring_soon_days":3}
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> (Invoke-WebRequest -UseBasicParsing http://localhost:8000/api/items/9999 -ErrorAction SilentlyContinue).StatusCode
+

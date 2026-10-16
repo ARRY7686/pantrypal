@@ -1,0 +1,23 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm lint helm\pantrypal
+==> Linting helm\pantrypal
+[INFO] Chart.yaml: icon is recommended
+
+1 chart(s) linted, 0 chart(s) failed
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm upgrade --install pantrypal helm\pantrypal -n pantrypal -f helm\pantrypal\values-local.yaml --wait --timeout 5m
+Release "pantrypal" does not exist. Installing it now.
+NAME: pantrypal
+LAST DEPLOYED: Fri Oct 16 15:53:11 2026
+NAMESPACE: pantrypal
+STATUS: deployed
+REVISION: 1
+DESCRIPTION: Install complete
+TEST SUITE: None
+NOTES:
+PantryPal is deployed to namespace pantrypal.
+
+  kubectl get pods,svc,ingress -n pantrypal
+
+Open http://pantrypal.local/ (point pantrypal.local at your ingress controller).
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm list -n pantrypal
+NAME     	NAMESPACE	REVISION	UPDATED                              	STATUS  	CHART          	APP VERSION
+pantrypal	pantrypal	1       	2026-10-16 15:53:11.2550974 +0530 IST	deployed	pantrypal-1.0.0	1.0.0      

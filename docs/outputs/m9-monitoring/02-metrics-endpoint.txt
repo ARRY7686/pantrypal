@@ -1,0 +1,17 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> 1..400 | ForEach-Object { Invoke-RestMethod http://localhost:8081/api/items -Headers @{ Host = 'pantrypal.local' } | Out-Null; if ($_ % 4 -eq 0) { Invoke-RestMethod http://localhost:8081/api/stats -Headers @{ Host = 'pantrypal.local' } | Out-Null } }; 'sent 500 requests through the Ingress'
+sent 500 requests through the Ingress
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> ((Invoke-WebRequest -UseBasicParsing http://localhost:8001/metrics).Content -split "`n") | Select-String -Pattern '^http_requests_total|^http_request_duration_seconds_count' | Select-Object -First 10
+
+http_requests_total{handler="/ready",method="GET",status="2xx"} 2.0
+http_requests_total{handler="/api/stats",method="GET",status="2xx"} 52.0
+http_requests_total{handler="/health",method="GET",status="2xx"} 2.0
+http_requests_total{handler="/api/items",method="POST",status="2xx"} 15.0
+http_requests_total{handler="/api/items",method="GET",status="2xx"} 200.0
+http_request_duration_seconds_count{handler="/ready",method="GET"} 2.0
+http_request_duration_seconds_count{handler="/api/stats",method="GET"} 52.0
+http_request_duration_seconds_count{handler="/health",method="GET"} 2.0
+http_request_duration_seconds_count{handler="/api/items",method="POST"} 15.0
+http_request_duration_seconds_count{handler="/api/items",method="GET"} 200.0
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get servicemonitor -n pantrypal
+NAME                AGE
+pantrypal-backend   33s

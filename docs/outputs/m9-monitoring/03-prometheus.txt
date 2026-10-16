@@ -1,0 +1,15 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> $prom = Start-Job { kubectl port-forward -n monitoring svc/kube-prometheus-stack-prometheus 9091:9090 }
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> (Invoke-RestMethod http://localhost:9091/api/v1/targets).data.activeTargets | Where-Object { $_.labels.service -like '*pantrypal*' } | Select-Object @{n='job';e={$_.labels.job}}, scrapeUrl, health | Format-Table -AutoSize
+
+job               scrapeUrl                       health
+---               ---------                       ------
+pantrypal-backend http://10.244.0.43:8000/metrics up    
+pantrypal-backend http://10.244.0.44:8000/metrics up    
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> (Invoke-RestMethod http://localhost:9091/api/v1/query -Body @{ query = 'sum by (handler) (http_requests_total{namespace="pantrypal"})' }).data.result | ForEach-Object { '{0,-22} {1}' -f $_.metric.handler, $_.value[1] }
+/ready                 12
+/api/stats             103
+/health                8
+/api/items             416
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Browser-Shot 'http://localhost:9091/targets?search=pantrypal' prometheus-targets 1440 900 8000
+saved docs/screenshots/browser/prometheus-targets.png (1440x900) from http://localhost:9091/targets?search=pantrypal

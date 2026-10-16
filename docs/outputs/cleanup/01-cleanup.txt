@@ -1,0 +1,45 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Get-Job | Stop-Job; Get-Job | Remove-Job
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm uninstall pantrypal -n pantrypal
+release "pantrypal" uninstalled
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm uninstall kube-prometheus-stack -n monitoring
+release "kube-prometheus-stack" uninstalled
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get crd -o name | Select-String monitoring.coreos.com | ForEach-Object { kubectl delete $_.ToString() }
+customresourcedefinition.apiextensions.k8s.io "alertmanagerconfigs.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "alertmanagers.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "podmonitors.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "probes.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "prometheusagents.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "prometheuses.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "prometheusrules.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "scrapeconfigs.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "servicemonitors.monitoring.coreos.com" deleted
+customresourcedefinition.apiextensions.k8s.io "thanosrulers.monitoring.coreos.com" deleted
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl delete namespace pantrypal monitoring
+namespace "pantrypal" deleted
+namespace "monitoring" deleted
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube addons disable ingress
+* "The 'ingress' addon is disabled
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> helm repo remove prometheus-community
+"prometheus-community" has been removed from your repositories
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> minikube image rm pantrypal-backend:local pantrypal-frontend:local pantrypal-backend:$sha pantrypal-frontend:$sha
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker rmi pantrypal-backend:local pantrypal-frontend:local pantrypal-backend:$sha pantrypal-frontend:$sha
+Untagged: pantrypal-backend:local
+Untagged: pantrypal-frontend:local
+Untagged: pantrypal-backend:a18d96c
+Deleted: sha256:e6d92352cca24f1c716a98a2e757468799f8c3f0ba487b43f43b3f55bbf148a3
+Untagged: pantrypal-frontend:a18d96c
+Deleted: sha256:cc48a7f25360e0d568aedd3de18bd998c3e9f7699405533fe0e0759081201ad7
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> docker rm -f pp-moto
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> Remove-Item -Recurse -Force terraform\.terraform, terraform\terraform.tfstate* -ErrorAction SilentlyContinue
+
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   36d
+kube-node-lease   Active   36d
+kube-public       Active   36d
+kube-system       Active   36d
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal> git status --short
+?? docs/

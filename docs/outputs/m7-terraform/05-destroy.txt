@@ -1,0 +1,8 @@
+﻿PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> terraform destroy -auto-approve -var enable_cluster_creator_admin_permissions=false | Select-Object -Last 3
+module.vpc.aws_vpc.this[0]: Destruction complete after 0s
+
+Destroy complete! Resources: 52 destroyed.
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> (terraform state list | Measure-Object).Count
+0
+PS C:\Users\aadig\OneDrive\Desktop\pantrypal\terraform> Remove-Item tfplan
+
