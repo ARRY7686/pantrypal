@@ -295,7 +295,7 @@ On a real cluster the `deploy` job does step 3 automatically: set the repo varia
 | :--- | :--- | :--- |
 | M1 | FastAPI `/health`, ≥4 REST endpoints, PostgreSQL + Alembic, React UI, responsive | [backend/app](backend/app), [alembic/versions](backend/alembic/versions), [frontend/src](frontend/src), screenshots above |
 | M2 | pytest ≥5 tests on ≥3 endpoints, test DB, `pytest.ini`/`conftest.py` | [backend/tests](backend/tests) (12 tests, SQLite), [pytest.ini](backend/pytest.ini) |
-| M3 | Public repo, meaningful commits (≥10), `.gitignore` | [commit history](https://github.com/ARRY7686/pantrypal/commits/main) (18 commits), [.gitignore](.gitignore) |
+| M3 | Public repo, meaningful commits (≥10), `.gitignore` | [commit history](https://github.com/ARRY7686/pantrypal/commits/main) (20 commits), [.gitignore](.gitignore) |
 | M4 | Backend Dockerfile, multi-stage frontend, non-root, compose with 3 services | [backend/Dockerfile](backend/Dockerfile) (uid 10001), [frontend/Dockerfile](frontend/Dockerfile) (uid 101), [docker-compose.yml](docker-compose.yml) |
 | M5 | Workflow on push to `main`, pytest gate, frontend build, both images, GHCR, SHA tags | [ci-cd.yml](.github/workflows/ci-cd.yml), [green run](https://github.com/ARRY7686/pantrypal/actions/runs/38887236452), [GHCR backend](https://github.com/ARRY7686/pantrypal/pkgs/container/pantrypal-backend) / [frontend](https://github.com/ARRY7686/pantrypal/pkgs/container/pantrypal-frontend) |
 | M6 | Trivy on both images, fails on HIGH/CRITICAL, explanation | `build-scan-push` job, [Security scanning](#security-scanning-trivy) |
